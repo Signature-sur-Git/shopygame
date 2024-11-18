@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ShopyGame</title>
+  <style>
+    /* Global */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #1C1C1C;
+      color: white;
+    }
+    a {
+      text-decoration: none;
+      color: white;
+    }
+
+    /* Header */
+    header {
+        background-color: #252525;
+        padding: 10px 20px;
+      }
+      .top-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+      }
+      .logo {
+        display: flex;
+        align-items: center;
+      }
+      .logo img {
+        width: 40px;
+        margin-right: 10px;
+      }
+      .actions {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .actions button {
+        padding: 5px 15px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      .actions .panier {
+        background-color: #01BBFF;
+        color: white;
+        border: 1px solid #01BBFF;
+        border-radius: 15px;
+        width: 150px;
+        height:35px;
+      }
+      .actions .connexion {
+        background-color: white;
+        color: black;
+        border: 1px solid ;
+        border-radius: 15px;
+        width: 150px;
+        height:35px;
+      }
+      .bottom-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      nav ul {
+        list-style: none;
+        display: flex;
+        gap: 20px;
+        margin-left: 150px
+      }
+      .search-bar input {
+        padding: 5px 10px;
+        border: 1px solid #444;
+        border-radius: 25px;
+        background-color: #333;
+        color: white;
+        margin-right: 100px;
+        width: 510px;
+        height:40px;
+      }  
+
+    /* Carrousel */
+    .carrousel {
+      position: relative;
+      margin: 20px 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+    }
+    .carrousel img {
+      width: 75%;
+      border-radius: 10px;
+      position: relative;
+    }
+    .carrousel .image-info {
+      position: absolute;
+      left: 10%;
+      bottom: 10%;
+      color: white;
+      text-shadow: 0px 0px 5px black;
+    }
+    .carrousel .image-info h2 {
+      font-size: 24px;
+    }
+    .carrousel .image-info .price {
+      font-size: 20px;
+      font-weight: bold;
+      margin: 10px 0;
+    }
+    .carrousel .image-info .buy-button {
+      background-color: #ffffff;
+      color: rgb(0, 0, 0);
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .carrousel .side-menu {
+      display: flex;
+      flex-direction: column;
+      gap: 134px;
+    }
+    .carrousel .side-menu button {
+      background-color: #1C1C1C;
+      color: white;
+      border: none;
+      text-align: right;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-radius: 15px;
+      width:250px;
+      height:100px;
+    }
+    .carrousel .side-menu button img {
+      width: 120px;
+      height: 100px;
+      border-radius: 15px;
+    }
+    .carrousel .side-menu button.active {
+      background-color: #373737;
+    }
+    
+    /* Cartes d'article */
+    .horizontal-section {
+        margin: 40px 20px;
+      }
+      .section-title {
+        font-size: 24px;
+        margin-bottom: 10px;
+        color: white;
+        text-align: left;
+      }
+      .scroll-container {
+        display: flex;
+        align-items: center;
+        position: relative;
+        overflow: hidden;
+      }
+      .cards-container {
+        display: flex;
+        overflow-x: auto;
+        gap: 20px;
+        scroll-behavior: smooth;
+        margin-left: 100px;
+        margin-right: 100px;
+        gap: 90px;
+      }
+      .card {
+        background-color: #333;
+        border-radius: 15px;
+        text-align: center;
+        width: 300px;
+        height:400px;
+      }
+      .card img {
+        width: 300px;
+        height: 200px;
+        border-radius: 10px;
+      }
+      .card h3 {
+        font-size: 18px;
+        margin: 10px 0;
+      }
+      .card .price {
+        font-size: 16px;
+        font-weight: bold;
+        color: #01BBFF;
+    }
+        .buy-button {
+            background-color: #ffffff;
+            color: rgb(0, 0, 0);
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+      
+      /* Boutons de défilement */
+      .scroll-button {
+        background-color: #444;
+        color: white;
+        border: none;
+        cursor: pointer;
+        padding: 10px;
+        font-size: 18px;
+        border-radius: 50%;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 1;
+      }
+      .scroll-button.left {
+        left: 0;
+      }
+      .scroll-button.right{
+      right:0;
+      }
+
+    /* Footer */
+    footer {
+      background-color: #252525;
+      padding: 20px;
+      text-align: center;
+    }
+    .footer-links {
+      margin-bottom: 10px;
+    }
+    .footer-links a {
+      margin: 0 10px;
+    }
+    .footer-logo img {
+      width: 50px;
+      margin: 10px 0;
+    }
+    .scroll-up {
+      background-color: #444;
+      padding: 10px;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      margin-left: 1780px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <!-- Top Header -->
+    <div class="top-header">
+      <div class="logo">
+        <img src="logo.png" alt="Logo">
+        <h1>ShopyGame</h1>
+      </div>
+      <div class="actions">
+        <button class="panier">Panier</button>
+        <button class="connexion">Connexion</button>
+      </div>
+    </div>
+    <!-- Bottom Header -->
+    <div class="bottom-header">
+      <nav>
+        <ul>
+          <li><a href="#">Découvrir</a></li>
+          <li><a href="#">Parcourir</a></li>
+          <li><a href="#">Accessoires</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="search-bar">
+        <input type="text" placeholder="Rechercher un article">
+      </div>
+    </div>
+  </header>
+  <!-- Carrousel -->
+  <section class="carrousel">
+    <img id="carrousel-image" src="cyberpunk.webp" alt="Cyberpunk">
+    <div class="image-info">
+      <h2 id="game-title">CYBERPUNK</h2>
+      <p class="price" id="game-price">15000F</p>
+      <button class="buy-button">Acheter</button>
+    </div>
+    <div class="side-menu">
+      <button data-image="cyberpunk.webp" data-title="CYBERPUNK" data-price="15000F" class="active">
+        <img src="cyberpunk_thumbnail.jpeg" alt="Cyberpunk">
+        CYBERPUNK
+      </button>
+      <button data-image="gow_ragnarok.jpg" data-title="GOW RAGNAROK" data-price="12000F">
+        <img src="gow_ragnarok_thumbnail.webp" alt="GOW Ragnarok">
+        GOW RAGNAROK
+      </button>
+      <button data-image="rage2.jpg" data-title="RAGE 2" data-price="10000F">
+        <img src="rage2_thumbnail.jpg" alt="Rage 2">
+        RAGE 2
+      </button>
+      <button data-image="nfs_heat.png" data-title="NFS HEAT" data-price="8500F">
+        <img src="nfs_heat_thumbnail.jpg" alt="NFS Heat">
+        NFS HEAT
+      </button>
+    </div>
+  </section>
+
+  <!-- Section Les intemporels -->
+  <section class="horizontal-section">
+    <h2 class="section-title">Les intemporels</h2>
+    <div class="scroll-container">
+      <button class="scroll-button left">&lt;</button>
+      <div class="cards-container">
+        <div class="card">
+          <img src="intemporel1.jpg" alt="Jeu Intemporel 1">
+          <h3>Resident Evil 5</h3>
+          <p class="price">15 000F</p>
+          <button class="buy-button">Acheter</button>
+        </div>
+        <div class="card">
+          <img src="intemporel2.jpg" alt="Jeu Intemporel 2">
+          <h3>Borderlands 3</h3>
+          <p class="price">12 000F</p>
+          <button class="buy-button">Acheter</button>
+        </div>
+        <div class="card">
+          <img src="intemporel3.jpeg" alt="Jeu Intemporel 3">
+          <h3>Resident Evil 6</h3>
+          <p class="price">10 000F</p>
+          <button class="buy-button">Acheter</button>
+        </div>
+        <div class="card">
+          <img src="intemporel4.webp" alt="Jeu Intemporel 4">
+          <h3>Rocket League</h3>
+          <p class="price">8 500F</p>
+          <button class="buy-button">Acheter</button>
+        </div>
+        <div class="card">
+            <img src="intemporel5.jpg" alt="Jeu Intemporel 1">
+            <h3>COD Ghosts</h3>
+            <p class="price">15 000F</p>
+            <button class="buy-button">Acheter</button>
+          </div>
+          <div class="card">
+            <img src="intemporel6.jpg" alt="Jeu Intemporel 2">
+            <h3>FC 25</h3>
+            <p class="price">12 000F</p>
+            <button class="buy-button">Acheter</button>
+      </div>
+      <button class="scroll-button right">&gt;</button>
+    </div>
+  </section>
+  <section class="horizontal-section">
+    <h2 class="section-title">A La Une</h2>
+    <div class="scroll-container">
+      <button class="scroll-button left">&lt;</button>
+      <div class="cards-container">
+        <div class="card">
+          <img src="intemporel1.jpg" alt="Jeu Intemporel 1">
+          <h3>Resident Evil 5</h3>
+          <p class="price">15 000F</p>
+          <button class="buy-button">Acheter</button>
+        </div>
+        <div class="card">
+          <img src="intemporel2.jpg" alt="Jeu Intemporel 2">
+          <h3>Borderlands 3</h3>
+          <p class="price">12 000F</p>
+          <button class="buy-button">Acheter</button>
+        </div>
+        <div class="card">
+          <img src="intemporel3.jpeg" alt="Jeu Intemporel 3">
+          <h3>Resident Evil 6</h3>
+          <p class="price">10 000F</p>
+          <button class="buy-button">Acheter</button>
+        </div>
+        <div class="card">
+          <img src="intemporel4.webp" alt="Jeu Intemporel 4">
+          <h3>Rocket League</h3>
+          <p class="price">8 500F</p>
+          <button class="buy-button">Acheter</button>
+        </div>
+        <div class="card">
+            <img src="intemporel5.jpg" alt="Jeu Intemporel 1">
+            <h3>COD Ghosts</h3>
+            <p class="price">15 000F</p>
+            <button class="buy-button">Acheter</button>
+          </div>
+          <div class="card">
+            <img src="intemporel6.jpg" alt="Jeu Intemporel 2">
+            <h3>FC 25</h3>
+            <p class="price">12 000F</p>
+            <button class="buy-button">Acheter</button>
+      </div>
+      <button class="scroll-button right">&gt;</button>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-links">
+      <a href="#">WhatsApp</a>
+      <a href="#">Facebook</a>
+    </div>
+    <div class="footer-logo">
+      <img src="logo.png" alt="Logo">
+    </div>
+    <p>© 2024 ShopyGame. Tous droits réservés.</p>
+    <button class="scroll-up">↑</button>
+  </footer>
+
+  <script>
+    // Carrousel automatique
+    const carrouselImage = document.getElementById('carrousel-image');
+    const gameTitle = document.getElementById('game-title');
+    const gamePrice = document.getElementById('game-price');
+    const menuButtons = document.querySelectorAll('.side-menu button');
+    let currentIndex = 0;
+
+    function updateCarrousel() {
+      menuButtons.forEach((button, index) => {
+        button.classList.remove('active');
+        if (index === currentIndex) {
+          button.classList.add('active');
+          carrouselImage.src = button.getAttribute('data-image');
+          gameTitle.textContent = button.getAttribute('data-title');
+          gamePrice.textContent = button.getAttribute('data-price');
+        }
+      });
+    }
+
+    function startCarrousel() {
+      setInterval(() => {
+        currentIndex = (currentIndex + 1) % menuButtons.length;
+        updateCarrousel();
+      }, 5000);
+    }
+
+    // Initialisation
+    updateCarrousel();
+    startCarrousel();
+
+    // Scroll haut
+    document.querySelector('.scroll-up').addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+    // Défilement horizontal
+    document.querySelectorAll('.horizontal-section').forEach((section) => {
+        const container = section.querySelector('.cards-container');
+        const leftButton = section.querySelector('.scroll-button.left');
+        const rightButton = section.querySelector('.scroll-button.right');
+    
+        leftButton.addEventListener('click', () => {
+        container.scrollBy({ left: -300, behavior: 'smooth' });
+        });
+    
+        rightButton.addEventListener('click', () => {
+        container.scrollBy({ left: 300, behavior: 'smooth'});
+    });
+    });
+    
+  </script>
+</body>
+</html>
